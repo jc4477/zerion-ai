@@ -494,7 +494,13 @@ const HomeView = ({ onStart, theme }: { onStart: () => void, theme: string }) =>
       </motion.div>
     </div>
 
-    <section className="container view-section">
+    <motion.section 
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8 }}
+      className="container view-section"
+    >
       <h2 style={{ textAlign: 'center', marginBottom: '3rem' }}>Why Choose Zerion?</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
         {[
@@ -502,14 +508,18 @@ const HomeView = ({ onStart, theme }: { onStart: () => void, theme: string }) =>
           { icon: <Zap size={32} color="var(--secondary)" />, title: "Instant Analysis", desc: "Get your structured task list in seconds, regardless of the meeting length." },
           { icon: <BarChart3 size={32} style={{ color: '#ffd700' }} />, title: "Smart Extraction", desc: "Detects nuanced owners and deadlines even if they are mentioned informally." }
         ].map((feat, i) => (
-          <div className="glass-card" key={i}>
+          <motion.div 
+            whileHover={{ y: -10 }} 
+            className="glass-card" 
+            key={i}
+          >
             {feat.icon}
             <h3 style={{ margin: '1rem 0' }}>{feat.title}</h3>
             <p style={{ color: 'var(--text-secondary)' }}>{feat.desc}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   </motion.div>
 );
 
@@ -668,7 +678,14 @@ const HowToUseView = () => (
           img: GUIDE_STEP_3
         }
       ].map((s, i) => (
-        <div key={i} style={{ display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1.2fr' : '1.2fr 1fr', gap: '4rem', alignItems: 'center' }}>
+        <motion.div 
+          key={i} 
+          initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: i * 0.2 }}
+          style={{ display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1.2fr' : '1.2fr 1fr', gap: '4rem', alignItems: 'center' }}
+        >
           {i % 2 === 0 ? (
             <div>
               <span className="gradient-text" style={{ fontSize: '1.2rem', fontWeight: 800 }}>{s.step}</span>
@@ -691,7 +708,7 @@ const HowToUseView = () => (
               <img src={s.img} alt={s.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
             </div>
           )}
-        </div>
+        </motion.div>
       ))}
     </div>
   </motion.div>
