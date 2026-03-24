@@ -879,6 +879,6 @@ input:checked + .slider:before {
   
   /* View padding adjustment */
   .view-section {
-    padding: 4rem 0;
+    padding: 4.01rem 0;
   }
 }
