@@ -107,7 +107,7 @@ const ExtractorView = ({ transcript, setTranscript, onProcess, loading, results,
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Transform your raw transcripts into actionable intelligence instantly.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: results.length > 0 ? '450px 1fr' : '1fr', gap: '4rem', alignItems: 'start' }}>
+      <div className={`tool-grid ${results.length > 0 ? 'has-results' : ''}`}>
 
         {/* Left Side: Input Studio */}
         <div className="flex-column" style={{ gap: '2rem' }}>
@@ -559,7 +559,7 @@ const BackEndWorksView = () => (
 
           <div style={{ color: 'var(--primary)', opacity: 0.5 }}>▼</div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', width: '100%' }}>
+          <div className="grid-2-col" style={{ gap: '1.5rem' }}>
             <motion.div whileHover={{ y: -5 }} className="glass-panel" style={{ padding: '2rem', textAlign: 'center', background: 'var(--card-bg)', border: '1px dashed var(--primary)' }}>
               <div className="gradient-text" style={{ fontSize: '0.8rem', fontWeight: 900 }}>PHASE 1: MVP</div>
               <h4 style={{ marginTop: '0.5rem' }}>Rule-Based Engine</h4>
@@ -596,7 +596,7 @@ const BackEndWorksView = () => (
             <div className="gradient-text" style={{ fontSize: '0.8rem', fontWeight: 800, textAlign: 'center' }}>STRATEGIC DATA OPS</div>
             <h3 style={{ textAlign: 'center', margin: '0.5rem 0 1.5rem' }}>Training & Annotation Strategy</h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem' }}>
+            <div className="grid-2-col" style={{ gap: '3rem' }}>
               <div>
                 <h4 style={{ color: 'var(--secondary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Shield size={16} /> Dataset Sources
@@ -684,7 +684,7 @@ const HowToUseView = () => (
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: false, margin: "-50px" }}
           transition={{ duration: 0.8, delay: i * 0.2 }}
-          style={{ display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1.2fr' : '1.2fr 1fr', gap: '4rem', alignItems: 'center' }}
+          className={`how-to-step ${i % 2 === 0 ? 'even-step' : 'odd-step'}`}
         >
           {i % 2 === 0 ? (
             <div>
