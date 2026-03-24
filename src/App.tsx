@@ -464,8 +464,8 @@ const AdaptorsHub = () => {
   ];
 
   return (
-    <section className="container view-section" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+    <section className="container view-section" style={{ position: 'relative', overflow: 'hidden', padding: '2rem 0' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h2 style={{ fontSize: '2.5rem' }}>Ecosystem <span className="gradient-text">Integration</span></h2>
       </div>
       
