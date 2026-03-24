@@ -100,21 +100,14 @@ body.light-theme .blob-2 { background: #fb923c; }
 body.light-theme .blob-3 { background: #ea580c; }
 
 body.light-theme .gradient-text {
-  background: linear-gradient(135deg, #f97316, #ea580c);
-  -webkit-background-clip: text;
-  background-clip: text;
+  background: var(--accent-gradient) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
 }
 
-body.light-theme h1, 
-body.light-theme h2, 
-body.light-theme h3, 
-body.light-theme h4, 
-body.light-theme p,
-body.light-theme span,
-body.light-theme li,
-body.light-theme label {
-  color: #111827 !important;
-}
+/* Removed brute force element overrides for light mode to let CSS properties work correctly */
 
 body.light-theme .text-secondary,
 body.light-theme .text-muted {
@@ -157,6 +150,54 @@ body.light-theme select.input-field option {
   background-color: #ffffff !important;
   color: #111827 !important;
 }
+
+/* Light Theme Hero Override */
+body.light-theme .video-hero {
+  background: #ffffff;
+}
+
+body.light-theme .bg-video {
+  opacity: 0.3;
+  filter: blur(4px) grayscale(30%);
+}
+
+body.light-theme .video-hero::after {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%);
+}
+
+body.light-theme .hero-content {
+  color: #111827;
+}
+
+/* Light Theme Background Effects Overrides */
+body.light-theme .mesh-glow {
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(234, 88, 12, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 10%, rgba(249, 115, 22, 0.05) 0%, transparent 40%);
+}
+
+body.light-theme .stars-background {
+  opacity: 0.4;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #f97316, rgba(255,255,255,0)),
+    radial-gradient(1px 1px at 40px 70px, #ccc, rgba(255,255,255,0)),
+    radial-gradient(1.5px 1.5px at 50px 160px, #999, rgba(255,255,255,0)),
+    radial-gradient(1px 1px at 90px 40px, #ccc, rgba(255,255,255,0)),
+    radial-gradient(1.5px 1.5px at 130px 80px, #f97316, rgba(255,255,255,0)),
+    radial-gradient(1px 1px at 160px 120px, #999, rgba(255,255,255,0));
+}
+
+body.light-theme .grid-pattern {
+  background-image: 
+    linear-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+}
+
+body.light-theme .cosmic-dust {
+  background: linear-gradient(45deg, #ffffff, transparent);
+}
+
 
 * {
   margin: 0;
@@ -271,6 +312,7 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.03em; }
   padding: 0.8rem 1.8rem;
   border-radius: 12px;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
   transition: var(--transition);
   border: none;
@@ -698,6 +740,8 @@ input:checked + .slider:before {
   overflow: hidden;
   background: #000;
   z-index: 20;
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 .bg-video {
@@ -708,15 +752,15 @@ input:checked + .slider:before {
   height: 100%;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.85;
+  opacity: 0.8;
+  filter: blur(4px);
 }
 
 .video-hero::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%),
-              linear-gradient(to bottom, transparent 80%, var(--background) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
   z-index: 2;
 }
 
@@ -732,17 +776,14 @@ input:checked + .slider:before {
   font-size: clamp(2.5rem, 8vw, 5rem);
   margin-bottom: 1rem;
   line-height: 1.1;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .hero-content p {
-  font-size: clamp(1rem, 3vw, 1.8rem);
-  opacity: 0.8;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
 }
 
 @media (max-width: 768px) {

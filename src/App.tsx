@@ -682,7 +682,7 @@ const HowToUseView = () => (
           key={i} 
           initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-50px" }}
           transition={{ duration: 0.8, delay: i * 0.2 }}
           style={{ display: 'grid', gridTemplateColumns: i % 2 === 0 ? '1fr 1.2fr' : '1.2fr 1fr', gap: '4rem', alignItems: 'center' }}
         >
@@ -812,6 +812,11 @@ function App() {
       document.body.classList.remove('light-theme');
     }
   }, [theme]);
+
+  // Ensure scroll is at top when we switch views
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeView]);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
