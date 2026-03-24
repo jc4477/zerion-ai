@@ -451,8 +451,106 @@ const Navbar = ({ activeView, setActiveView, theme }: { activeView: string, setA
   );
 };
 
+const AdaptorsHub = () => {
+  const adaptors = [
+    { id: '01', name: 'Zoom', color: '#ff4d4d' },
+    { id: '02', name: 'G-Meet', color: '#ffb84d' },
+    { id: '03', name: 'Teams', color: '#4dff88' },
+    { id: '04', name: 'Slack', color: '#4dffff' },
+    { id: '05', name: 'Webex', color: '#4d88ff' },
+    { id: '06', name: 'Skype', color: '#b84dff' },
+    { id: '07', name: 'Discord', color: '#ff4dff' },
+    { id: '08', name: 'BlueJeans', color: '#ff4d88' },
+  ];
+
+  return (
+    <section className="container view-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <div style={{ textAlign: 'center', marginBottom: '6rem' }}>
+        <h2 style={{ fontSize: '2.5rem' }}>Ecosystem <span className="gradient-text">Integration</span></h2>
+      </div>
+      
+      <div className="hub-container">
+        {/* Radial Lines Background */}
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.15 }}>
+          {/* Faint dotted orbit line */}
+          <div style={{
+            position: 'absolute', top: '12%', left: '12%', right: '12%', bottom: '12%',
+            border: '2px dashed var(--text-secondary)', borderRadius: '50%', opacity: 0.2
+          }} />
+        </div>
+
+        {/* Center Node */}
+        <div className="hub-center glass-panel">
+          <span style={{ color: 'var(--primary)', fontSize: 'clamp(0.6rem, 1.5vw, 0.8rem)', fontWeight: 800, letterSpacing: '2px' }}>CORE</span>
+          <h3 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', margin: '0.1rem 0' }}>HUB</h3>
+          <div style={{ width: '20%', height: '3px', background: 'var(--primary)', margin: '0.2rem 0' }} />
+          <span style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.5rem, 1.2vw, 0.7rem)', fontWeight: 600, letterSpacing: '1px' }}>8 ADAPTORS</span>
+        </div>
+
+        {/* Connecting Lines */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 5, pointerEvents: 'none' }}>
+          {adaptors.map((item, i) => {
+            const angle = (i * 45) - 90;
+            return (
+              <motion.div 
+                key={`line-${item.id}`}
+                initial={{ width: 0, opacity: 0 }}
+                whileInView={{ width: 'var(--radius)', opacity: 0.6 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: "easeOut" }}
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  height: '2px',
+                  background: `linear-gradient(90deg, transparent 30%, ${item.color} 100%)`,
+                  transformOrigin: '0% 50%',
+                  transform: `translateY(-50%) rotate(${angle}deg)`
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Outer Adapters */}
+        {adaptors.map((item, i) => {
+          const angle = (i * 45) - 90;
+          return (
+            <div
+              key={item.id}
+              className="hub-node"
+              style={{
+                transform: `translate(-50%, -50%) rotate(${angle}deg) translateX(var(--radius)) rotate(${-angle}deg)`
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.1 + 0.1, type: 'spring', bounce: 0.4 }}
+              >
+                <div className="hub-node-circle" style={{
+                  borderColor: item.color,
+                  boxShadow: `0 0 15px ${item.color}30`
+                }}>
+                  <div className="hub-node-badge" style={{ background: item.color }}>
+                    {item.id}
+                  </div>
+                  <span className="hub-node-text">{item.name}</span>
+                  <div style={{ width: '20%', height: '2px', background: item.color, marginTop: '4px' }} />
+                </div>
+              </motion.div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
 const HomeView = ({ onStart, theme }: { onStart: () => void, theme: string }) => (
   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+
     <div className="video-hero">
       <video autoPlay muted loop playsInline className="bg-video">
         <source src="/background.mp4" type="video/mp4" />
@@ -493,6 +591,8 @@ const HomeView = ({ onStart, theme }: { onStart: () => void, theme: string }) =>
         <div style={{ width: '2px', height: '60px', background: 'linear-gradient(to bottom, var(--primary), transparent)', borderRadius: '1px' }} />
       </motion.div>
     </div>
+
+    <AdaptorsHub />
 
     <motion.section 
       initial={{ opacity: 0, y: 50 }}
